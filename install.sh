@@ -4,7 +4,7 @@ apt install python3-pip -y
 apt install python3-venv -y
 
 # Install package deps
-sudo apt install python3-flask python3-opencv
+sudo apt install python3-flask python3-opencv python3-flask-cors -y
 
 # Create venv
 python3 -m venv venv
