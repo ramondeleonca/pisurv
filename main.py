@@ -9,8 +9,9 @@ CORS(app, resources={r"/*": {"origins": "*"}})
 
 cameras = {}
 
-@app.route("/camera/<idx>")
-def stream(idx: int):
+@app.route("/camera/<id>")
+def stream(id):
+    idx = int(id)
     if idx not in cameras:
         cameras[idx] = cv2.VideoCapture(idx)
     def generate_frames():
