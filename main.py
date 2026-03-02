@@ -7,13 +7,15 @@ PORT = 8192
 app = flask.Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})
 
-camera = cv2.VideoCapture(0)
+cameras = {}
 
-@app.route("/stream")
-def stream():
+@app.route("/camera/<idx>")
+def stream(idx: int):
+    if idx not in cameras:
+        cameras[idx] = cv2.VideoCapture(idx)
     def generate_frames():
         while True:
-            success, frame = camera.read()
+            success, frame = cameras[idx].read()
             if not success:
                 continue
             else:
